@@ -4,6 +4,7 @@ const TimeClock = ({ currentTime }) => {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [dayOfWeek, setDayOfWeek] = useState(currentTime)
+  // Options for dayOfWeek date string
   const options = { weekday: 'long', month: 'numeric', day: 'numeric' }
 
   const handleStartClick = () => {
