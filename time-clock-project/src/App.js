@@ -14,10 +14,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-      <div>Current Time: {currentTime.toLocaleTimeString()}</div>
+      <div className='time-clock--container'>
+        <div className='time-clock--current'>Current Time: {currentTime.toLocaleTimeString()}</div>
         <TimeClock currentTime={currentTime}/>
-      </header>
+      </div>
     </div>
   );
 }
