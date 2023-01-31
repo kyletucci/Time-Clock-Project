@@ -1,19 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const TimeClock = ({ currentTime }) => {
-  const [startTime, setStartTime] = useState(null);
-  const [endTime, setEndTime] = useState(null);
-  const [dayOfWeek, setDayOfWeek] = useState(currentTime)
+const TimeClock = ({ currentTime, startTime, endTime, handleStartClick, handleEndClick }) => {
+  
+  const dayOfWeek = currentTime
   // Options for dayOfWeek date strings
-  const options = { weekday: 'long', month: 'numeric', day: 'numeric' }
-
-  const handleStartClick = () => {
-    setStartTime(currentTime);
-  };
-
-  const handleEndClick = () => {
-    setEndTime(currentTime);
-  };
+  const options = { weekday: 'long' }
 
   let duration = null;
   if (startTime && endTime) {
