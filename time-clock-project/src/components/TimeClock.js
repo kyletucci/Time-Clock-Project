@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TimeClock = ({ currentTime, startTime, endTime, handleStartClick, handleEndClick }) => {
+function TimeClock({ currentTime, startTime, endTime, handleStartClick, handleEndClick }){
   
   const dayOfWeek = currentTime
   // Options for dayOfWeek date strings
@@ -16,7 +16,7 @@ const TimeClock = ({ currentTime, startTime, endTime, handleStartClick, handleEn
       <div>{dayOfWeek ? dayOfWeek.toLocaleDateString(undefined, options) : 'Not started'}</div>
       <div>Start Time: {startTime ? startTime.toLocaleTimeString() : 'Not started'}</div>
       <div>End Time: {endTime ? endTime.toLocaleTimeString() : 'Not ended'}</div>
-      <div>Duration: {duration} hours</div>
+      <div>Duration: {duration} {duration && `hours`}</div>
       <button onClick={handleStartClick} disabled={startTime}>
         Start
       </button>
