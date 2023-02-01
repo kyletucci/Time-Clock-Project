@@ -46,7 +46,7 @@ function App() {
       }
     localStorage.setItem("DURATION", JSON.stringify(duration))
     localStorage.setItem("FULL_WEEK", JSON.stringify(fullWeek))
-    setFullWeek(startTime + (40 * 60 * 60 * 1000))
+    setFullWeek(startTime + (80 * 60 * 60 * 1000))
     if(!endTime){
     startTime && setTimeRemaining(fullWeek - currentTime.getTime())
     }
