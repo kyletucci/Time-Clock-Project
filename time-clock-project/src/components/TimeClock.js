@@ -1,22 +1,21 @@
 import React from 'react';
 
-function TimeClock({ currentTime, startTime, endTime, handleStartClick, handleEndClick }){
-  
-  const dayOfWeek = currentTime
-  // Options for dayOfWeek date strings
-  const options = { weekday: 'long' }
+function TimeClock({ dayOfWeek, currentTime, startTime, endTime, duration, handleStartClick, handleEndClick }){
 
-  let duration = null;
-  if (startTime && endTime) {
-    duration = ((endTime - startTime) / 1000 / 60 / 60).toFixed(2);
+  if(startTime){
+    startTime = new Date(startTime).toLocaleTimeString()
+  }
+
+  if(endTime){
+    endTime = new Date(endTime).toLocaleTimeString()
   }
 
   return (
     <div>
-      <div>{dayOfWeek ? dayOfWeek.toLocaleDateString(undefined, options) : 'Not started'}</div>
+      <div>{dayOfWeek && dayOfWeek}</div>
       <div>Start Time: {startTime ? startTime : 'Not started'}</div>
       <div>End Time: {endTime ? endTime : 'Not ended'}</div>
-      <div>Duration: {duration} {duration && `hours`}</div>
+      <div>Duration: {duration && `${duration.toFixed(2)} hours`}</div>
       <button onClick={handleStartClick} disabled={startTime}>
         Start
       </button>
