@@ -19,6 +19,12 @@ const StyledTimeClock = styled.div`
     margin: 0 auto;
   `
 
+  const StyledArrow = styled.a`
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+  `
+
 function TimeClock({ dayOfWeek, currentTime, startTime, endTime, duration, handleStartClick, handleEndClick }){
 
   if(startTime){
@@ -31,7 +37,7 @@ function TimeClock({ dayOfWeek, currentTime, startTime, endTime, duration, handl
 
   return (
     <StyledTimeClock>
-      <div>{dayOfWeek && dayOfWeek}</div>
+      <div><StyledArrow href='#'>{'<--'}</StyledArrow> {dayOfWeek && dayOfWeek} <StyledArrow href='#'>{'-->'}</StyledArrow></div>
       <StyledRow>
         <div>Start Time: </div>
         <div>{startTime ? startTime : 'Not started'}</div>
