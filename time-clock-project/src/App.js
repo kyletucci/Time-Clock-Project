@@ -16,11 +16,11 @@ function App() {
   }, [])
 
   const handleStartClick = () => {
-    setStartTime(currentTime)
+    setStartTime(currentTime.toLocaleTimeString())
   };
 
   const handleEndClick = () => {
-    setEndTime(currentTime)
+    setEndTime(currentTime.toLocaleTimeString())
   };
 
   return (

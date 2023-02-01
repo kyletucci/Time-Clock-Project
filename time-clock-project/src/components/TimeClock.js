@@ -14,8 +14,8 @@ function TimeClock({ currentTime, startTime, endTime, handleStartClick, handleEn
   return (
     <div>
       <div>{dayOfWeek ? dayOfWeek.toLocaleDateString(undefined, options) : 'Not started'}</div>
-      <div>Start Time: {startTime ? startTime.toLocaleTimeString() : 'Not started'}</div>
-      <div>End Time: {endTime ? endTime.toLocaleTimeString() : 'Not ended'}</div>
+      <div>Start Time: {startTime ? startTime : 'Not started'}</div>
+      <div>End Time: {endTime ? endTime : 'Not ended'}</div>
       <div>Duration: {duration} {duration && `hours`}</div>
       <button onClick={handleStartClick} disabled={startTime}>
         Start
