@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import TimeClock from './components/TimeClock'
+import styled from 'styled-components'
+
+const StyledClear = styled.button`
+height: 50px;
+width: 200px;
+`
 
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -79,7 +85,7 @@ function App() {
       <div className='time-clock--container'>
         <div className='time-clock--current'>Current Time: {currentTime.toLocaleTimeString()}</div>
         <TimeClock dayOfWeek='Monday' currentTime={currentTime} startTime={startTime} endTime={endTime} duration={duration} handleStartClick={handleStartClick} handleEndClick={handleEndClick}/>
-        <button onClick={handleClear}>Clear</button>
+        <StyledClear onClick={handleClear}>Clear</StyledClear>
         <div>Time Remaining: {(timeRemaining / (1000 * 60 * 60)).toFixed(2)} hours</div>
         {startTime && getFinalTime()}
       </div>
