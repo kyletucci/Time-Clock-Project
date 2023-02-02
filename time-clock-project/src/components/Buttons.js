@@ -6,8 +6,12 @@ width: 100px;
 height: 50px;
 margin: 0 auto;
 `
+const StyledClear = styled.button`
+height: 50px;
+width: 200px;
+`
 
-function Buttons({ startTime, handleStartClick, handleStartChange, endTime, handleEndClick }) {
+function Buttons({ startTime, handleStartClick, endTime, handleEndClick, handleClear }) {
   return (
     <>
         <StyledButton onClick={handleStartClick} disabled={startTime}>
@@ -16,6 +20,8 @@ function Buttons({ startTime, handleStartClick, handleStartChange, endTime, hand
         <StyledButton onClick={handleEndClick} disabled={!startTime || endTime}>
             End
         </StyledButton>
+        <StyledClear onClick={handleClear}>Clear</StyledClear>
+
     </>
   )
 }
