@@ -28,11 +28,31 @@ const StyledTimeClock = styled.div`
 function TimeClock({ dayOfWeek, currentTime, startTime, endTime, duration, handleStartClick, handleEndClick }){
 
   if(startTime){
-    startTime = new Date(startTime).toLocaleTimeString()
+    startTime = new Date(startTime)
   }
 
   if(endTime){
     endTime = new Date(endTime).toLocaleTimeString()
+  }
+
+  function getTimeValue(){
+    let hours = startTime.getHours();
+    let minutes = startTime.getMinutes();
+    let seconds = startTime.getSeconds();
+
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    return (hours + ":" + minutes + ":" + seconds)
   }
 
   return (
@@ -40,8 +60,9 @@ function TimeClock({ dayOfWeek, currentTime, startTime, endTime, duration, handl
       <div><StyledArrow href='#'>{'<--'}</StyledArrow> {dayOfWeek && dayOfWeek} <StyledArrow href='#'>{'-->'}</StyledArrow></div>
       <StyledRow>
         <div>Start Time: </div>
-        <div>{startTime ? startTime : 'Not started'}</div>
+        <div>{startTime ? startTime.toLocaleTimeString() : 'Not started'}</div>
       </StyledRow>
+      <input type="time" value={getTimeValue()}></input>
       <StyledRow>
         <div>End Time: </div>
         <div>{endTime ? endTime : 'Not ended'}</div>
