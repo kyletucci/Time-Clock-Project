@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import TimeClock from './components/TimeClock'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ width: 200px;
 
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
-
+  const [selectedDate, setSelectedDate] = useState(new Date(currentTime).toISOString().split('T')[0])
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [duration, setDuration] = useState(null)
@@ -57,15 +57,45 @@ function App() {
     startTime && setTimeRemaining(fullWeek - currentTime.getTime())
     }
     localStorage.setItem("TIME_REMAINING", JSON.stringify(timeRemaining))
-  }, [startTime, endTime, duration, fullWeek, timeRemaining, currentTime])
+    localStorage.setItem("SELECTED_DATE", JSON.stringify(selectedDate))
+  }, [selectedDate, startTime, endTime, duration, fullWeek, timeRemaining, currentTime])
+
+  function handleDateEdit(event){
+    setSelectedDate(event.target.value)
+  }
 
   const handleStartClick = () => {
     setStartTime(currentTime.getTime())
+    console.log(startTime)
   };
+
+  function handleStartEdit(event){
+    setStartTime(event.target.value)
+  }
 
   const handleEndClick = () => {
     setEndTime(currentTime.getTime())
   };
+
+  function getTimeValue(time){
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+    let seconds = time.getSeconds();
+
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    return (hours + ":" + minutes + ":" + seconds)
+  }
 
   function getFinalTime(){
     let date = new Date(fullWeek)
@@ -80,11 +110,26 @@ function App() {
     setTimeRemaining(40 * 60 * 60 * 1000)
   }
 
+  function handleLeftArrow(){
+    selectedDate.setDate(selectedDate.getDate() - 1)
+  }
+
   return (
     <div className="App">
       <div className='time-clock--container'>
-        <div className='time-clock--current'>Current Time: {currentTime.toLocaleTimeString()}</div>
-        <TimeClock dayOfWeek='Monday' currentTime={currentTime} startTime={startTime} endTime={endTime} duration={duration} handleStartClick={handleStartClick} handleEndClick={handleEndClick}/>
+        <div className='time-clock--current'>It is currently {currentTime.toLocaleTimeString()} on {currentTime.toDateString()}</div>
+        <TimeClock
+          handleLeftArrow={handleLeftArrow}
+          handleDateChange={handleDateEdit}
+          handleStartChange={handleStartEdit}
+          getTimeValue={getTimeValue}
+          dayOfWeek={selectedDate}
+          currentTime={currentTime}
+          startTime={startTime}
+          endTime={endTime}
+          duration={duration}
+          handleStartClick={handleStartClick}
+          handleEndClick={handleEndClick}/>
         <StyledClear onClick={handleClear}>Clear</StyledClear>
         <div>Time Remaining: {(timeRemaining / (1000 * 60 * 60)).toFixed(2)} hours</div>
         {startTime && getFinalTime()}
