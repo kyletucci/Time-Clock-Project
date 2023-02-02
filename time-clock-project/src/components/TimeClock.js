@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
+import Duration from './Duration'
+import Buttons from './Buttons'
+import { ButtonBase } from '@mui/material';
 
 const StyledTimeClock = styled.div`
     display: flex;
@@ -13,11 +16,6 @@ const StyledTimeClock = styled.div`
     display: flex;
     justify-content: space-between;
   `
-  const StyledButton = styled.button`
-    width: 100px;
-    height: 50px;
-    margin: 0 auto;
-  `
 
   const StyledArrow = styled.a`
     color: white;
@@ -25,10 +23,23 @@ const StyledTimeClock = styled.div`
     font-weight: bolder;
   `
 
-function TimeClock({ dayOfWeek, currentTime, startTime, endTime, duration, handleStartClick, handleEndClick }){
-
+function TimeClock(
+  {
+    handleLeftArrow,
+    dayOfWeek,
+    handleDateChange,
+    startTime,
+    handleStartClick,
+    handleStartChange,
+    endTime,
+    handleEndClick,
+    getTimeValue,
+    currentTime,
+    duration,
+  }){
+  
   if(startTime){
-    startTime = new Date(startTime).toLocaleTimeString()
+    startTime = new Date(startTime)
   }
 
   if(endTime){
@@ -37,23 +48,28 @@ function TimeClock({ dayOfWeek, currentTime, startTime, endTime, duration, handl
 
   return (
     <StyledTimeClock>
-      <div><StyledArrow href='#'>{'<--'}</StyledArrow> {dayOfWeek && dayOfWeek} <StyledArrow href='#'>{'-->'}</StyledArrow></div>
+      <div>
+        <StyledArrow onClick={handleLeftArrow} href='#'>{'<--'}</StyledArrow>
+        <input type='date' onChange={handleDateChange} value={dayOfWeek}></input>
+        <StyledArrow href='#'>{'-->'}</StyledArrow>
+      </div>
       <StyledRow>
         <div>Start Time: </div>
-        <div>{startTime ? startTime : 'Not started'}</div>
+        <div>{<input type="time" onChange={handleStartChange} value={startTime && getTimeValue(startTime)}></input>}</div>
       </StyledRow>
       <StyledRow>
         <div>End Time: </div>
         <div>{endTime ? endTime : 'Not ended'}</div>
       </StyledRow>
-      <div>Duration: {duration && `${duration.toFixed(2)} hours`}</div>
+      <Duration duration={duration} />
       <StyledRow>
-        <StyledButton onClick={handleStartClick} disabled={startTime}>
-          Start
-        </StyledButton>
-        <StyledButton onClick={handleEndClick} disabled={!startTime || endTime}>
-          End
-        </StyledButton>
+        <Buttons 
+          startTime={startTime}
+          handleStartClick={handleStartClick}
+          handleStartChange={handleStartChange}
+          endTime={endTime}
+          handleEndClick={handleEndClick}
+        />
       </StyledRow>
     </StyledTimeClock>
   );
