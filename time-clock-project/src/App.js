@@ -16,7 +16,8 @@ function App() {
   const [duration, setDuration] = useState(null)
   const [fullWeek, setFullWeek] = useState('')
   const [timeRemaining, setTimeRemaining] = useState('')
-
+  
+  //Set interval for clock to refresh
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
