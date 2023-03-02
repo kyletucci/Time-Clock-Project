@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components'
 import Duration from './Duration'
 import Buttons from './Buttons'
-import { ButtonBase } from '@mui/material';
 
 const StyledTimeClock = styled.div`
     display: flex;
@@ -34,16 +33,20 @@ function TimeClock(
     endTime,
     handleEndClick,
     getTimeValue,
-    currentTime,
-    duration,
   }){
+
+  const [duration, setDuration] = useState("")
+
+  function updateDuration(duration){
+    setDuration(duration)
+  }
   
   if(startTime){
     startTime = new Date(startTime)
   }
 
   if(endTime){
-    endTime = new Date(endTime).toLocaleTimeString()
+    endTime = new Date(endTime)
   }
 
   return (
@@ -55,13 +58,13 @@ function TimeClock(
       </div>
       <StyledRow>
         <div>Start Time: </div>
-        <div>{<input type="time" onChange={handleStartChange} value={startTime && getTimeValue(startTime)}></input>}</div>
+        <div><input type="time" onChange={handleStartChange} value={startTime && getTimeValue(startTime)}></input></div>
       </StyledRow>
       <StyledRow>
         <div>End Time: </div>
-        <div>{endTime ? endTime : 'Not ended'}</div>
+        <div><input type="time" value={endTime && getTimeValue(endTime)}></input></div>
       </StyledRow>
-      <Duration duration={duration} />
+      <Duration updateDuration={updateDuration} />
       <StyledRow>
         <Buttons 
           startTime={startTime}
