@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components'
 import Duration from './Duration'
 import Buttons from './Buttons'
+import TimeInput from './TimeInput'
 
 const StyledTimeClock = styled.div`
     display: flex;
@@ -24,31 +25,17 @@ const StyledTimeClock = styled.div`
 
 function TimeClock(
   {
+    startTime,
+    handleStartChange,
+    endTime,
+    handleEndChange,
+    handleEndClick,
     handleLeftArrow,
     dayOfWeek,
     handleDateChange,
-    startTime,
-    handleStartClick,
-    handleStartChange,
-    endTime,
-    handleEndClick,
-    getTimeValue,
+    handleStartClick
   }){
-
-  const [duration, setDuration] = useState("")
-
-  function updateDuration(duration){
-    setDuration(duration)
-  }
   
-  if(startTime){
-    startTime = new Date(startTime)
-  }
-
-  if(endTime){
-    endTime = new Date(endTime)
-  }
-
   return (
     <StyledTimeClock>
       <div>
@@ -58,13 +45,12 @@ function TimeClock(
       </div>
       <StyledRow>
         <div>Start Time: </div>
-        <div><input type="time" onChange={handleStartChange} value={startTime && getTimeValue(startTime)}></input></div>
+        <TimeInput time={startTime} onChange={handleStartChange} />
       </StyledRow>
       <StyledRow>
         <div>End Time: </div>
-        <div><input type="time" value={endTime && getTimeValue(endTime)}></input></div>
+        <TimeInput time={endTime} onChange={handleEndChange} />
       </StyledRow>
-      <Duration updateDuration={updateDuration} />
       <StyledRow>
         <Buttons 
           startTime={startTime}

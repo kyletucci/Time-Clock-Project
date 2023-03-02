@@ -12,10 +12,9 @@ width: 200px;
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(new Date(currentTime).toISOString().split('T')[0])
-  const [startTime, setStartTime] = useState('')
-  const [endTime, setEndTime] = useState('')
+  const [startTime, setStartTime] = useState("")
+  const [endTime, setEndTime] = useState("")
   const [timeRemaining, setTimeRemaining] = useState('')
-  const [duration, setDuration] = useState(0)
 
   // useEffect(() => {
   //   const storedStartTime = JSON.parse(localStorage.getItem("START_TIME"))
@@ -61,14 +60,22 @@ function App() {
     setSelectedDate(event.target.value)
   }
 
-  const handleStartClick = () => {
-    setStartTime(currentTime.getTime())
-  };
+  function handleStartClick(){
+    setStartTime(getTimeValue(currentTime))
+  }
 
-  const handleEndClick = () => {
-    setEndTime(currentTime.getTime())
-    duration && setDuration(endTime - startTime)
-  };
+  function handleStartChange(event){
+    setStartTime(event.target.value)
+  }
+
+  function handleEndClick() {
+    setEndTime(getTimeValue(currentTime))
+  }
+
+  function handleEndChange(event){
+    setEndTime(event.target.value)
+  }
+
 
   function getTimeValue(time){
     let hours = time.getHours();
@@ -105,13 +112,15 @@ function App() {
       <div className='time-clock--container'>
         <CurrentDateTime currentTime={currentTime} updateTime={updateTime} />
         <TimeClock
+          startTime={startTime}
+          handleStartChange={handleStartChange}
+          endTime={endTime}
+          handleEndChange={handleEndChange}
           handleLeftArrow={handleLeftArrow}
           handleDateChange={handleDateEdit}
           getTimeValue={getTimeValue}
           dayOfWeek={selectedDate}
           currentTime={currentTime}
-          startTime={startTime}
-          endTime={endTime}
           handleStartClick={handleStartClick}
           handleEndClick={handleEndClick}
           />
