@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-import TimeClock from './components/TimeClock'
 import styled from 'styled-components'
-import CurrentDateTime from './components/CurrentDateTime';
+import CurrentDateTime from './components/CurrentDateTime'
+import DateInput from './components/DateInput'
+import TimeClock from './components/TimeClock'
 
 const StyledClear = styled.button`
 height: 50px;
@@ -11,7 +12,7 @@ width: 200px;
 
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [selectedDate, setSelectedDate] = useState(new Date(currentTime).toISOString().split('T')[0])
+  const [selectedDate, setSelectedDate] = useState(new Date(currentTime).toISOString().slice(0,10))
   const [startTime, setStartTime] = useState("")
   const [endTime, setEndTime] = useState("")
   const [timeRemaining, setTimeRemaining] = useState('')
@@ -56,7 +57,7 @@ function App() {
     setCurrentTime(newTime)
   }
 
-  function handleDateEdit(event){
+  function handleDateChange(event){
     setSelectedDate(event.target.value)
   }
 
@@ -111,13 +112,14 @@ function App() {
     <div className="App">
       <div className='time-clock--container'>
         <CurrentDateTime currentTime={currentTime} updateTime={updateTime} />
+        <DateInput selectedDate={selectedDate} handleDateChange={handleDateChange}  />
         <TimeClock
           startTime={startTime}
           handleStartChange={handleStartChange}
           endTime={endTime}
           handleEndChange={handleEndChange}
           handleLeftArrow={handleLeftArrow}
-          handleDateChange={handleDateEdit}
+          handleDateChange={handleDateChange}
           getTimeValue={getTimeValue}
           dayOfWeek={selectedDate}
           currentTime={currentTime}

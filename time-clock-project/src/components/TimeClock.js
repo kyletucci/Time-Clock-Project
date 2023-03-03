@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
-import Duration from './Duration'
-import Buttons from './Buttons'
 import TimeInput from './TimeInput'
+import Buttons from './Buttons'
 
 const StyledTimeClock = styled.div`
     display: flex;
@@ -17,12 +16,6 @@ const StyledTimeClock = styled.div`
     justify-content: space-between;
   `
 
-  const StyledArrow = styled.a`
-    color: white;
-    text-decoration: none;
-    font-weight: bolder;
-  `
-
 function TimeClock(
   {
     startTime,
@@ -30,19 +23,11 @@ function TimeClock(
     endTime,
     handleEndChange,
     handleEndClick,
-    handleLeftArrow,
-    dayOfWeek,
-    handleDateChange,
     handleStartClick
   }){
   
   return (
     <StyledTimeClock>
-      <div>
-        <StyledArrow onClick={handleLeftArrow} href='#'>{'<--'}</StyledArrow>
-        <input type='date' onChange={handleDateChange} value={dayOfWeek}></input>
-        <StyledArrow href='#'>{'-->'}</StyledArrow>
-      </div>
       <StyledRow>
         <div>Start Time: </div>
         <TimeInput time={startTime} onChange={handleStartChange} />
