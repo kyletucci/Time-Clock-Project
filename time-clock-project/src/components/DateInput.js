@@ -7,12 +7,12 @@ text-decoration: none;
 font-weight: bolder;
 `
 
-function DateInput({ selectedDate, handleDateChange }) {
+function DateInput({ selectedDate, handleDateChange, handleLeftArrow, handleRightArrow }) {
   return (
     <>   
-    <StyledArrow href='#'>{'<--'}</StyledArrow>
+    <StyledArrow onClick={handleLeftArrow} href='#'>{'<--'}</StyledArrow>
     <input type='date' onChange={handleDateChange} value={selectedDate}></input>
-    <StyledArrow href='#'>{'-->'}</StyledArrow>
+    <StyledArrow onClick={handleRightArrow} href='#'>{'-->'}</StyledArrow>
     </>
   )
 }

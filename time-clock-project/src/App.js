@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
 import styled from 'styled-components'
-import { format, subDays, addDays } from 'date-fns'
+import { format, subDays, addDays, formatDuration, intervalToDuration } from 'date-fns'
 import CurrentDateTime from './components/CurrentDateTime'
 import DateInput from './components/DateInput'
 import TimeClock from './components/TimeClock'
+import Duration from './components/Duration'
 
 const StyledClear = styled.button`
 height: 50px;
@@ -16,6 +17,7 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [startTime, setStartTime] = useState("")
   const [endTime, setEndTime] = useState("")
+  const [duration, setDuration] = useState("")
   const [timeRemaining, setTimeRemaining] = useState('')
 
   // useEffect(() => {
@@ -63,7 +65,7 @@ function App() {
   }
 
   function handleStartClick(){
-    setStartTime(getTimeValue(currentTime))
+    setStartTime(format(currentTime, 'hh:mm'))
   }
 
   function handleStartChange(event){
@@ -71,13 +73,12 @@ function App() {
   }
 
   function handleEndClick() {
-    setEndTime(getTimeValue(currentTime))
+    setEndTime(format(currentTime, 'hh:mm'))
   }
 
   function handleEndChange(event){
     setEndTime(event.target.value)
   }
-
 
   function getTimeValue(time){
     let hours = time.getHours();
@@ -106,15 +107,29 @@ function App() {
   }
 
   function handleLeftArrow(){
-    setSelectedDate(subDays(format(new Date(), 'dd MMMM yyyy HH:mm')),1)
+    const newDay = subDays(selectedDate, 1)
+    setSelectedDate(newDay)
   }
-  console.log(selectedDate)
+
+  function handleRightArrow(){
+    const newDay = addDays(selectedDate, 1)
+    setSelectedDate(newDay)
+  }
+
+  function calculateDuration(startTime, endTime){
+    return formatDuration(
+      intervalToDuration({
+        start: startTime,
+        end: endTime,
+      }),
+    { format: ['hours', 'minutes', 'seconds'],})
+  }
 
   return (
     <div className="App">
       <div className='time-clock--container'>
         <CurrentDateTime currentTime={currentTime} updateTime={updateTime} />
-        <DateInput selectedDate={format(selectedDate,'yyyy-MM-dd')} handleDateChange={handleDateChange} handleLeftArrow={handleLeftArrow}  />
+        <DateInput selectedDate={format(selectedDate,'yyyy-MM-dd')} handleDateChange={handleDateChange} handleLeftArrow={handleLeftArrow} handleRightArrow={handleRightArrow}  />
         <TimeClock
           startTime={startTime}
           handleStartChange={handleStartChange}
@@ -128,6 +143,7 @@ function App() {
           handleStartClick={handleStartClick}
           handleEndClick={handleEndClick}
           />
+        <Duration calculateDuration={calculateDuration} startTime={startTime} endTime={endTime} />
         <StyledClear onClick={handleClear}>Clear</StyledClear>
         <div>Time Remaining: {(timeRemaining / (1000 * 60 * 60)).toFixed(2)} hours</div>
       </div>
