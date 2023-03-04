@@ -7,11 +7,6 @@ import DateInput from './components/DateInput'
 import TimeClock from './components/TimeClock'
 import Duration from './components/Duration'
 
-const StyledClear = styled.button`
-height: 50px;
-width: 200px;
-`
-
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -142,9 +137,9 @@ function App() {
           currentTime={currentTime}
           handleStartClick={handleStartClick}
           handleEndClick={handleEndClick}
+          duration={duration}
+          handleClear={handleClear}
           />
-        <Duration calculateDuration={calculateDuration} startTime={startTime} endTime={endTime} />
-        <StyledClear onClick={handleClear}>Clear</StyledClear>
         <div>Time Remaining: {(timeRemaining / (1000 * 60 * 60)).toFixed(2)} hours</div>
       </div>
     </div>
