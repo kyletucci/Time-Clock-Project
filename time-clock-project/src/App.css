@@ -12,3 +12,11 @@
   min-width: 100vw;
   min-height: 100vh;
 }
+
+.time-clock--container {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

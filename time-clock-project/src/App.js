@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import styled from 'styled-components'
 import { format, subDays, addDays, formatDuration, intervalToDuration } from 'date-fns'
 import CurrentDateTime from './components/CurrentDateTime'
 import DateInput from './components/DateInput'
@@ -139,6 +138,7 @@ function App() {
           handleEndClick={handleEndClick}
           duration={duration}
           handleClear={handleClear}
+          selectedDate={selectedDate}
           />
         <div>Time Remaining: {(timeRemaining / (1000 * 60 * 60)).toFixed(2)} hours</div>
       </div>

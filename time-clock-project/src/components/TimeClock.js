@@ -3,19 +3,16 @@ import styled from 'styled-components'
 import TimeInput from './TimeInput'
 import Buttons from './Buttons'
 import Duration from './Duration';
+import CurrentTimeSlot from './CurrentTimeSlot';
 
 const StyledTimeClock = styled.div`
   background-color: rgba(200,200,200,.5);
-  height: 500px;
-  width: 400px;
-  padding: 50px 0;
-  margin-top: 50px;
-
+  width: 80%;
+  padding: 10px 50px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-
+  justify-content: space-evenly;
+  align-items: space-evenly;
   font-size: 20px;
   color: white;
 
@@ -38,32 +35,14 @@ function TimeClock(
     handleEndClick,
     handleStartClick,
     duration,
-    handleClear
+    handleClear,
+    currentTime,
+    selectedDate
   }){
   
   return (
     <StyledTimeClock>
-      <StyledRow>
-        <div>Start Time: </div>
-        <TimeInput time={startTime} onChange={handleStartChange} />
-      </StyledRow>
-      <StyledRow>
-        <div>End Time: </div>
-        <TimeInput time={endTime} onChange={handleEndChange} />
-      </StyledRow>
-      <StyledRow>
-        <Duration duration={duration}/>
-      </StyledRow>
-      <StyledRow>
-        <Buttons 
-          startTime={startTime}
-          handleStartClick={handleStartClick}
-          handleStartChange={handleStartChange}
-          endTime={endTime}
-          handleEndClick={handleEndClick}
-          handleClear={handleClear}
-        />
-      </StyledRow>
+      <CurrentTimeSlot selectedDate={selectedDate} currentTime={currentTime} />
     </StyledTimeClock>
   );
 };

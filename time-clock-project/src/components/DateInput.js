@@ -7,17 +7,19 @@ const StyledArrow = styled.a`
     font-weight: bolder;
 `
 
-const StyledDateInput = styled.input`
-    color: #282c34;
+const StyledDateInput = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
 `
 
 function DateInput({ selectedDate, handleDateChange, handleLeftArrow, handleRightArrow }) {
   return (
-    <>
+    <StyledDateInput>
         <StyledArrow onClick={handleLeftArrow} href='#'>{'<--'}</StyledArrow>
-        <StyledDateInput type='date' onChange={handleDateChange} value={selectedDate} />
+        <input type='date' onChange={handleDateChange} value={selectedDate} />
         <StyledArrow onClick={handleRightArrow} href='#'>{'-->'}</StyledArrow>
-    </>
+    </StyledDateInput>
   )
 }
 
