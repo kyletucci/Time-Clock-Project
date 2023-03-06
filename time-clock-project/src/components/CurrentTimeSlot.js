@@ -10,44 +10,57 @@ const StyledSelected = styled.div`
 
 const StyledUnselected = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    background-color: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? 'black' : 'none'};
+    color: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? 'white' : 'black'};
+    height: 100px;
+    width: 100%;
+    padding: 0 20px;
 `
 
 const StyledTimeInput = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+`
+
+const StyledInputLabel = styled.p`
+    color: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? 'white' : 'black'};
+    margin-bottom: 10px
 `
 
 
 function CurrentTimeSlot({ currentTime, selectedDate }) {
-    const dayOfWeek = getDay(selectedDate)
     const dayInitials = ['S','M','T','W','Th','F','Sa']
     const workWeek = startOfWeek(selectedDate)
     const daysOfCurrentWeek = []
     for(let i = 0; i < 5; i++){
         daysOfCurrentWeek.push(addDays(workWeek, i+1))
     }
-    const totalHtml = daysOfCurrentWeek.map((day, i) => 
-        <StyledUnselected>
-            <div>{dayInitials[i+1]}</div>
-            <div>{format(day, 'M/dd')}</div>
-            <StyledTimeInput>
-                <p>Start Time:</p>
-                <TimeInput />
-            </StyledTimeInput>
-            <StyledTimeInput>
-                <p>End Time:</p>
-                <TimeInput />
-            </StyledTimeInput>
-            <div>Total: </div>
-        </StyledUnselected>
-        )
+    const totalHtml = daysOfCurrentWeek.map((day, i) => {
+        const dayOfWeek = getDay(day)
+        const dayOfSelected = getDay(selectedDate)
+        console.log(dayOfWeek, dayOfSelected)
+        return(
+            <StyledUnselected key={dayOfWeek} dayOfWeek={dayOfWeek} dayOfSelected={dayOfSelected}>
+                <div style={{color: 'inherit'}}>{dayInitials[i+1]}</div>
+                <div style={{color: 'inherit'}}>{format(day, 'MM/dd')}</div>
+                <StyledTimeInput>
+                    <StyledInputLabel>Start Time:</StyledInputLabel>
+                    <TimeInput />
+                </StyledTimeInput>
+                <StyledTimeInput>
+                    <StyledInputLabel>End Time:</StyledInputLabel>
+                    <TimeInput />
+                </StyledTimeInput>
+                <div>Total: 8hrs</div>
+            </StyledUnselected>
+            )})
   return (
-    <>
+    <div style={{color: 'inherit'}}>
         {totalHtml}
-    </>
+    </div>
   )
 }
 

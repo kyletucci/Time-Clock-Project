@@ -17,7 +17,7 @@ function DateInput({ selectedDate, handleDateChange, handleLeftArrow, handleRigh
   return (
     <StyledDateInput>
         <StyledArrow onClick={handleLeftArrow} href='#'>{'<--'}</StyledArrow>
-        <input type='date' onChange={handleDateChange} value={selectedDate} />
+        <input style={{color: 'black'}} type='date' onChange={handleDateChange} value={selectedDate} />
         <StyledArrow onClick={handleRightArrow} href='#'>{'-->'}</StyledArrow>
     </StyledDateInput>
   )
