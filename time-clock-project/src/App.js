@@ -49,7 +49,7 @@ function App() {
   //   localStorage.setItem("TIME_REMAINING", JSON.stringify(timeRemaining))
   //   localStorage.setItem("SELECTED_DATE", JSON.stringify(selectedDate))
   // }, [selectedDate, startTime, endTime, duration, fullWeek, timeRemaining, currentTime])
-  
+
   function updateTime(newTime){
     setCurrentTime(newTime)
   }

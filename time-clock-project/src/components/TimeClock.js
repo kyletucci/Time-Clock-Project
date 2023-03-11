@@ -8,23 +8,12 @@ import CurrentTimeSlot from './CurrentTimeSlot';
 const StyledTimeClock = styled.div`
   background-color: rgba(200,200,200,.5);
   width: 80%;
-  padding: 10px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: space-evenly;
+  max-width: 600px;
+  /* padding: 10px 50px; */
   font-size: 20px;
   color: white;
-
   border-radius: 50px;
   `
-
-const StyledRow = styled.div`
-width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`
 
 function TimeClock(
   {

@@ -16,8 +16,7 @@ function StartTime({ time, onChange }){
        type="time"
        onChange={onChange}
        value={time && time}
-       
-       />
+      />
     )
 }
 

@@ -14,9 +14,9 @@ const StyledUnselected = styled.div`
     align-items: center;
     background-color: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? 'black' : 'none'};
     color: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? 'white' : 'black'};
-    height: 100px;
+    height: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? '200px' : '100px'};
     width: 100%;
-    padding: 0 20px;
+    padding: 0 30px;
 `
 
 const StyledTimeInput = styled.div`
@@ -32,7 +32,7 @@ const StyledInputLabel = styled.p`
 
 
 function CurrentTimeSlot({ currentTime, selectedDate }) {
-    const dayInitials = ['S','M','T','W','Th','F','Sa']
+    const dayInitials = ['S','M','T','W','Th','F','Sa', 'S']
     const workWeek = startOfWeek(selectedDate)
     const daysOfCurrentWeek = []
     for(let i = 0; i < 5; i++){
@@ -41,7 +41,6 @@ function CurrentTimeSlot({ currentTime, selectedDate }) {
     const totalHtml = daysOfCurrentWeek.map((day, i) => {
         const dayOfWeek = getDay(day)
         const dayOfSelected = getDay(selectedDate)
-        console.log(dayOfWeek, dayOfSelected)
         return(
             <StyledUnselected key={dayOfWeek} dayOfWeek={dayOfWeek} dayOfSelected={dayOfSelected}>
                 <div style={{color: 'inherit'}}>{dayInitials[i+1]}</div>

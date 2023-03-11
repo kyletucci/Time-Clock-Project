@@ -1,17 +1,18 @@
 import styled from 'styled-components'
 import React from 'react'
 
+const StyledDateInput = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+`
+
 const StyledArrow = styled.a`
     color: white;
     text-decoration: none;
     font-weight: bolder;
 `
 
-const StyledDateInput = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 25%;
-`
 
 function DateInput({ selectedDate, handleDateChange, handleLeftArrow, handleRightArrow }) {
   return (
