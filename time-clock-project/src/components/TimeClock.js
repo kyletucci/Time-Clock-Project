@@ -12,7 +12,6 @@ const StyledTimeClock = styled.div`
   /* padding: 10px 50px; */
   font-size: 20px;
   color: white;
-  border-radius: 50px;
   `
 
 function TimeClock(

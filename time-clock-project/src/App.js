@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { format, subDays, addDays, formatDuration, intervalToDuration } from 'date-fns'
+import { format, subDays, addDays, formatDuration, intervalToDuration, isFriday } from 'date-fns'
 import CurrentDateTime from './components/CurrentDateTime'
 import DateInput from './components/DateInput'
 import TimeClock from './components/TimeClock'
@@ -106,7 +106,14 @@ function App() {
   }
 
   function handleRightArrow(){
-    const newDay = addDays(selectedDate, 1)
+    let newDay
+    if (isFriday(selectedDate)){
+      newDay = addDays(selectedDate, 3)
+    }
+    else {
+      newDay = addDays(selectedDate, 1)
+    }
+    
     setSelectedDate(newDay)
   }
 

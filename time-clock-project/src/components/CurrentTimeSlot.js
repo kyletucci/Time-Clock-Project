@@ -14,7 +14,7 @@ const StyledUnselected = styled.div`
     align-items: center;
     background-color: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? 'black' : 'none'};
     color: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? 'white' : 'black'};
-    height: ${({ dayOfWeek, dayOfSelected }) => dayOfWeek === dayOfSelected ? '200px' : '100px'};
+    height: 100px;
     width: 100%;
     padding: 0 30px;
 `
