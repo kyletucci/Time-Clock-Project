@@ -8,7 +8,7 @@ const StyledSelected = styled.div`
     justify-content: space-between;
 `
 
-const StyledUnselected = styled.div`
+const StyledTimeSlot = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,7 +31,14 @@ const StyledInputLabel = styled.p`
 `
 
 
-function CurrentTimeSlot({ currentTime, selectedDate }) {
+function CurrentTimeSlot(
+    {   currentTime,
+        selectedDate,
+        startTime,
+        endTime,
+        handleStartChange,
+        handleEndChange 
+    }) {
     const dayInitials = ['S','M','T','W','Th','F','Sa', 'S']
     const workWeek = startOfWeek(selectedDate)
     const daysOfCurrentWeek = []
@@ -42,19 +49,19 @@ function CurrentTimeSlot({ currentTime, selectedDate }) {
         const dayOfWeek = getDay(day)
         const dayOfSelected = getDay(selectedDate)
         return(
-            <StyledUnselected key={dayOfWeek} dayOfWeek={dayOfWeek} dayOfSelected={dayOfSelected}>
+            <StyledTimeSlot key={dayOfWeek} dayOfWeek={dayOfWeek} dayOfSelected={dayOfSelected}>
                 <div style={{color: 'inherit'}}>{dayInitials[i+1]}</div>
                 <div style={{color: 'inherit'}}>{format(day, 'MM/dd')}</div>
                 <StyledTimeInput>
                     <StyledInputLabel>Start Time:</StyledInputLabel>
-                    <TimeInput />
+                    <TimeInput key={day} time={startTime} onChange={handleStartChange}/>
                 </StyledTimeInput>
                 <StyledTimeInput>
                     <StyledInputLabel>End Time:</StyledInputLabel>
-                    <TimeInput />
+                    <TimeInput key={day+1} time={endTime} onChange={handleEndChange}/>
                 </StyledTimeInput>
-                <div>Total: 8hrs</div>
-            </StyledUnselected>
+                <div>Total: {endTime - startTime}</div>
+            </StyledTimeSlot>
             )})
   return (
     <div style={{color: 'inherit'}}>

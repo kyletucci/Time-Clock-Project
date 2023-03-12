@@ -3,13 +3,12 @@ import styled from 'styled-components'
 import TimeInput from './TimeInput'
 import Buttons from './Buttons'
 import Duration from './Duration';
-import CurrentTimeSlot from './CurrentTimeSlot';
+import TimeSlot from './TimeSlot';
 
 const StyledTimeClock = styled.div`
   background-color: rgba(200,200,200,.5);
   width: 80%;
   max-width: 600px;
-  /* padding: 10px 50px; */
   font-size: 20px;
   color: white;
   `
@@ -30,7 +29,13 @@ function TimeClock(
   
   return (
     <StyledTimeClock>
-      <CurrentTimeSlot selectedDate={selectedDate} currentTime={currentTime} />
+      <TimeSlot
+        selectedDate={selectedDate}
+        currentTime={currentTime}
+        startTime={startTime}
+        handleStartChange={handleStartChange}
+        endTime={endTime}
+        handleEndChange={handleEndChange}/>
     </StyledTimeClock>
   );
 };

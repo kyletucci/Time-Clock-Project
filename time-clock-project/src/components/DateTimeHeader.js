@@ -8,7 +8,7 @@ const StyledDateHeader = Styled.div`
     justify-content: space-between;
 `
 
-function CurrentDateTime({ currentTime, updateTime }) {
+function DateTimeHeader({ currentTime, updateTime }) {
     //Set interval for clock to refresh
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -25,4 +25,4 @@ function CurrentDateTime({ currentTime, updateTime }) {
   )
 }
 
-export default CurrentDateTime
+export default DateTimeHeader

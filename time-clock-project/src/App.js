@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
-import { format, subDays, addDays, formatDuration, intervalToDuration, isFriday } from 'date-fns'
-import CurrentDateTime from './components/CurrentDateTime'
+import {
+  format,
+  subDays,
+  addDays,
+  formatDuration,
+  intervalToDuration,
+  isMonday,
+  isFriday 
+} from 'date-fns'
+import DateTimeHeader from './components/DateTimeHeader'
 import DateInput from './components/DateInput'
 import TimeClock from './components/TimeClock'
 import Duration from './components/Duration'
@@ -56,6 +64,8 @@ function App() {
 
   function handleDateChange(event){
     setSelectedDate(new Date(event.target.value))
+    console.log(selectedDate)
+    console.log(event.target.value)
   }
 
   function handleStartClick(){
@@ -101,7 +111,13 @@ function App() {
   }
 
   function handleLeftArrow(){
-    const newDay = subDays(selectedDate, 1)
+    let newDay
+    if (isMonday(selectedDate)){
+      newDay = subDays(selectedDate, 3)
+    }
+    else {
+      newDay = subDays(selectedDate, 1)
+    }
     setSelectedDate(newDay)
   }
 
@@ -113,7 +129,6 @@ function App() {
     else {
       newDay = addDays(selectedDate, 1)
     }
-    
     setSelectedDate(newDay)
   }
 
@@ -129,7 +144,7 @@ function App() {
   return (
     <div className="App">
       <div className='time-clock--container'>
-        <CurrentDateTime currentTime={currentTime} updateTime={updateTime} />
+        <DateTimeHeader currentTime={currentTime} updateTime={updateTime} />
         <DateInput selectedDate={format(selectedDate,'yyyy-MM-dd')} handleDateChange={handleDateChange} handleLeftArrow={handleLeftArrow} handleRightArrow={handleRightArrow}  />
         <TimeClock
           startTime={startTime}

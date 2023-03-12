@@ -9,15 +9,16 @@ const StyledTimeInput = Styled.input`
 `
 
 
-function StartTime({ time, onChange }){
+function TimeInput({ time, onChange }){
 
     return (
       <StyledTimeInput 
        type="time"
+       key={time}
        onChange={onChange}
        value={time && time}
       />
     )
 }
 
-export default StartTime
+export default TimeInput
