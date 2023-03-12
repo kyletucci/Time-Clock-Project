@@ -4,22 +4,22 @@ import {
   format,
   subDays,
   addDays,
-  formatDuration,
-  intervalToDuration,
+  // formatDuration,
+  // intervalToDuration,
   isMonday,
   isFriday 
 } from 'date-fns'
 import DateTimeHeader from './components/DateTimeHeader'
 import DateInput from './components/DateInput'
 import TimeClock from './components/TimeClock'
-import Duration from './components/Duration'
+// import Duration from './components/Duration'
 
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [startTime, setStartTime] = useState("")
   const [endTime, setEndTime] = useState("")
-  const [duration, setDuration] = useState("")
+  // const [duration, setDuration] = useState("")
   const [timeRemaining, setTimeRemaining] = useState('')
 
   // useEffect(() => {
@@ -132,14 +132,14 @@ function App() {
     setSelectedDate(newDay)
   }
 
-  function calculateDuration(startTime, endTime){
-    return formatDuration(
-      intervalToDuration({
-        start: startTime,
-        end: endTime,
-      }),
-    { format: ['hours', 'minutes', 'seconds'],})
-  }
+  // function calculateDuration(startTime, endTime){
+  //   return formatDuration(
+  //     intervalToDuration({
+  //       start: startTime,
+  //       end: endTime,
+  //     }),
+  //   { format: ['hours', 'minutes', 'seconds'],})
+  // }
 
   return (
     <div className="App">
@@ -158,7 +158,7 @@ function App() {
           currentTime={currentTime}
           handleStartClick={handleStartClick}
           handleEndClick={handleEndClick}
-          duration={duration}
+          // duration={duration}
           handleClear={handleClear}
           selectedDate={selectedDate}
           />

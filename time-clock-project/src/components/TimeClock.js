@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
-import TimeInput from './TimeInput'
-import Buttons from './Buttons'
-import Duration from './Duration';
+// import Buttons from './Buttons'
+// import Duration from './Duration';
 import TimeSlot from './TimeSlot';
 
 const StyledTimeClock = styled.div`
@@ -19,10 +18,10 @@ function TimeClock(
     handleStartChange,
     endTime,
     handleEndChange,
-    handleEndClick,
-    handleStartClick,
-    duration,
-    handleClear,
+    // handleEndClick,
+    // handleStartClick,
+    // duration,
+    // handleClear,
     currentTime,
     selectedDate
   }){

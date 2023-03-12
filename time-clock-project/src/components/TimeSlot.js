@@ -1,12 +1,12 @@
 import React from 'react'
-import { format, getDay, startOfWeek, addDays, add } from 'date-fns'
+import { format, getDay, startOfWeek, addDays } from 'date-fns'
 import styled from 'styled-components'
 import TimeInput from './TimeInput'
 
-const StyledSelected = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
+// const StyledSelected = styled.div`
+//     display: flex;
+//     justify-content: space-between;
+// `
 
 const StyledTimeSlot = styled.div`
     display: flex;
