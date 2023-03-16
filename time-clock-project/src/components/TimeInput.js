@@ -8,15 +8,13 @@ const StyledTimeInput = Styled.input`
   color: #282c34;
 `
 
-
 function TimeInput({ time, onChange }){
 
     return (
-      <StyledTimeInput 
-       type="time"
-       key={time}
-       onChange={onChange}
-       value={time && time}
+      <StyledTimeInput
+        type="time"
+        onChange={onChange}
+        value={time && time}
       />
     )
 }

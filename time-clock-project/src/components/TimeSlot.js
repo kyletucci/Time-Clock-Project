@@ -1,5 +1,5 @@
 import React from 'react'
-import { format, getDay, startOfWeek, addDays } from 'date-fns'
+import { format } from 'date-fns'
 import styled from 'styled-components'
 import TimeInput from './TimeInput'
 
@@ -31,43 +31,31 @@ const StyledInputLabel = styled.p`
 `
 
 
-function CurrentTimeSlot(
-    {   currentTime,
-        selectedDate,
+function TimeSlot({   
         startTime,
         endTime,
         handleStartChange,
-        handleEndChange 
+        handleEndChange,
+        dayOfWeek,
+        day,
+        dayInitial ,
+        dayOfSelected,
     }) {
-    const dayInitials = ['S','M','T','W','Th','F','Sa', 'S']
-    const workWeek = startOfWeek(selectedDate)
-    const daysOfCurrentWeek = []
-    for(let i = 0; i < 5; i++){
-        daysOfCurrentWeek.push(addDays(workWeek, i+1))
-    }
-    const totalHtml = daysOfCurrentWeek.map((day, i) => {
-        const dayOfWeek = getDay(day)
-        const dayOfSelected = getDay(selectedDate)
-        return(
-            <StyledTimeSlot key={dayOfWeek} dayOfWeek={dayOfWeek} dayOfSelected={dayOfSelected}>
-                <div style={{color: 'inherit'}}>{dayInitials[i+1]}</div>
-                <div style={{color: 'inherit'}}>{format(day, 'MM/dd')}</div>
-                <StyledTimeInput>
-                    <StyledInputLabel>Start Time:</StyledInputLabel>
-                    <TimeInput key={day} time={startTime} onChange={handleStartChange}/>
-                </StyledTimeInput>
-                <StyledTimeInput>
-                    <StyledInputLabel>End Time:</StyledInputLabel>
-                    <TimeInput key={day+1} time={endTime} onChange={handleEndChange}/>
-                </StyledTimeInput>
-                <div>Total: {endTime - startTime}</div>
-            </StyledTimeSlot>
-            )})
-  return (
-    <div style={{color: 'inherit'}}>
-        {totalHtml}
-    </div>
-  )
+    return(
+        <StyledTimeSlot>
+            <div>{dayInitial}</div>
+            <div>{format(day, 'MM/dd')}</div>
+            <StyledTimeInput>
+                <StyledInputLabel>Start Time:</StyledInputLabel>
+                <TimeInput time={startTime} onChange={handleStartChange}/>
+            </StyledTimeInput>
+            <StyledTimeInput>
+                <StyledInputLabel>End Time:</StyledInputLabel>
+                <TimeInput time={endTime} onChange={handleEndChange}/>
+            </StyledTimeInput>
+            <div>Total: </div>
+        </StyledTimeSlot>
+    )
 }
 
-export default CurrentTimeSlot
+export default TimeSlot

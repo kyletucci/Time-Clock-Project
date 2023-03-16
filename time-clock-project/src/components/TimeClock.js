@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import { getDay, startOfWeek, addDays } from 'date-fns'
 // import Buttons from './Buttons'
 // import Duration from './Duration';
 import TimeSlot from './TimeSlot';
@@ -12,8 +13,7 @@ const StyledTimeClock = styled.div`
   color: white;
   `
 
-function TimeClock(
-  {
+function TimeClock({
     startTime,
     handleStartChange,
     endTime,
@@ -25,18 +25,37 @@ function TimeClock(
     currentTime,
     selectedDate
   }){
-  
+
+    const weekdayInitials = ['M','T','W','Th','F','Sa', 'S']
+    const calendarWeek = startOfWeek(selectedDate)
+    const workWeek = []
+
+    for(let i = 0; i < 5; i++){
+      workWeek.push(addDays(calendarWeek, i+1))
+    }
+    const dateSelected=getDay(selectedDate)
+    const timeSlotHtml = workWeek.map((day, i) => {
+        return (
+        <TimeSlot
+          key={i}
+          selectedDate={selectedDate}
+          currentTime={currentTime}
+          startTime={startTime}
+          handleStartChange={handleStartChange}
+          endTime={endTime}
+          handleEndChange={handleEndChange}
+          dayOfSelected={dateSelected}
+          dayInitial={weekdayInitials[i]}
+          dayOfWeek={getDay(day)}
+          day={day}
+          />
+        )
+    })
   return (
     <StyledTimeClock>
-      <TimeSlot
-        selectedDate={selectedDate}
-        currentTime={currentTime}
-        startTime={startTime}
-        handleStartChange={handleStartChange}
-        endTime={endTime}
-        handleEndChange={handleEndChange}/>
+      {timeSlotHtml}
     </StyledTimeClock>
   );
-};
+}
 
-export default TimeClock;
+export default TimeClock
